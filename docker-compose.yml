@@ -1,0 +1,22 @@
+services:
+  rabbitmq:
+    image: "rabbitmq:management"
+    container_name: "rabbitmq"
+    ports:
+      - "5672:5672"  # AMQP port
+      - "15672:15672"  # Management plugin web UI
+    environment:
+      RABBITMQ_DEFAULT_USER: "graeyyy"
+      RABBITMQ_DEFAULT_PASS: "pyr_hornet0101"
+    volumes:
+      - "rabbitmq_data:/var/lib/rabbitmq"  # Persist data between container restarts
+    networks:
+      - rabbitmq_network
+
+volumes:
+  rabbitmq_data:
+    driver: local
+
+networks:
+  rabbitmq_network:
+    driver: bridge
